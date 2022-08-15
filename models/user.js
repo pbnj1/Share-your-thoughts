@@ -22,9 +22,15 @@ const userSchema = new Schema({
     friends: [
         // TODO NEED TO INSERT CODE HERE
     ],
+    },
+    {
+        toJSON: {
+          virtuals: true,
+        },
+        id: false,
+      }
 
-
-})
+)
 
     // TODO
 // Schema Settings:
