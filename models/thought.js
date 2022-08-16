@@ -3,6 +3,7 @@ const { Schema, model, Types } = require('mongoose');
 // import moment module to format the timestamp 
 const moment = require('moment')
 
+
 // create the thought schema
 const thoughtSchema = new Schema ({
     thoughtText: {
@@ -33,7 +34,6 @@ const thoughtSchema = new Schema ({
 
 
 // create the reaction subdocument schema
-
 const reactionsSchema = new Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
