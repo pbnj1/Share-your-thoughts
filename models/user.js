@@ -1,3 +1,4 @@
+// ...file is done?
 const { Schema, model, Types } = require('mongoose');
 
 const userSchema = new Schema({
@@ -16,13 +17,22 @@ const userSchema = new Schema({
             "Please fill a valid email address",
           ],
     },
+    // references the thoughts model
     thoughts: [
-        // TODO NEED TO INSERT CODE HERE
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Thought",
+          },
     ],
+    // references the user model
     friends: [
-        // TODO NEED TO INSERT CODE HERE
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+          },
     ],
     },
+    // lets us use virtuals
     {
         toJSON: {
           virtuals: true,
@@ -32,11 +42,12 @@ const userSchema = new Schema({
 
 )
 
-    // TODO
-// Schema Settings:
+ 
 // Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
 
-
+userSchema.virtual("friendCount").get(function () {
+    return this.friends.length;
+  });
 
 
 // create the User model using the UserSchema
