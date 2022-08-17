@@ -47,19 +47,6 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  //delete a user
-  //BONUS: Remove a user's associated thoughts when deleted.
-  deleteUser(req, res) {
-    User.findOneAndDelete({ _id: req.params.userId })
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "No User find with this ID!" })
-          : Thought.deleteMany({ _id: { $in: user.thoughts } })
-      )
-      .then(() => res.json({ message: "User and Thought deleted!" }))
-      .catch((err) => res.status(500).json(err));
-  },
-
   //add a friend
   addFriend(req, res) {
     User.findOneAndUpdate(
@@ -75,7 +62,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  
+
   //delete a friend
   deleteFriend(req, res) {
     User.findOneAndUpdate(
@@ -90,4 +77,18 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+
+  // BONUS delete a user
+  deleteUser(req, res) {
+    User.findOneAndDelete({ _id: req.params.userId })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No User find with this ID!" })
+          : Thought.deleteMany({ _id: { $in: user.thoughts } })
+      )
+      .then(() => res.json({ message: "User and Thought deleted!" }))
+      .catch((err) => res.status(500).json(err));
+  },
+
+
 };
